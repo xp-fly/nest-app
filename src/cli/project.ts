@@ -17,4 +17,9 @@ export class Project {
     const frameworkTsconfig = require(join(this.frameworkDir, 'tsconfig.json'));
     return frameworkTsconfig;
   }
+
+  tsBuildConfig() {
+    const tsBuildConfig = require(join(this.frameworkDir, 'tsconfig.build.json'));
+    return tsBuildConfig;
+  }
 }
