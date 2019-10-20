@@ -19,7 +19,7 @@ export class StartCommand extends AbstractCommand {
         const projectDir = process.cwd();
         const modulesDir = resolve(this.frameworkRoot, 'modules');
         const pkgJson = require(resolve(projectDir, 'package.json'));
-        const appName = pkgJson.name.replace(/nest-app-/g, '');
+        const appName = pkgJson.name.replace(/nestapp-/g, '');
         const appDir = resolve(modulesDir, appName);
         // 构建
         shelljs.exec('npm run build');

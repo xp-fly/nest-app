@@ -19,8 +19,8 @@ export class InitCommand extends AbstractCommand {
       .command('init [name]')
       .action((name, command: Command) => {
         if (name) {
-          const appName = `nest-app-${name}`;
-          const exampleDir = path.resolve(this.frameworkRoot, 'templates/nest-app-example');
+          const appName = `nestapp-${name}`;
+          const exampleDir = path.resolve(this.frameworkRoot, 'templates/nestapp-example');
           const projectDir = path.resolve(process.cwd(), appName);
           shelljs.cp('-R', exampleDir, projectDir);
           const project = new Project(this.frameworkRoot);

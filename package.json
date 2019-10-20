@@ -1,5 +1,5 @@
 {
-  "name": "nest-app",
+  "name": "nestapp",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -19,12 +19,13 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "bin": {
-    "nest-app": "bin/nest-app.js"
+    "nestapp": "bin/nestapp.js"
   },
   "dependencies": {
     "@nestjs/common": "^6.0.0",
     "@nestjs/core": "^6.0.0",
     "@nestjs/platform-express": "^6.0.0",
+    "@nestjs/typeorm": "^6.2.0",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.9.1",
     "commander": "^2.20.0",
@@ -34,7 +35,7 @@
     "rimraf": "^2.6.2",
     "rxjs": "^6.3.3",
     "shelljs": "^0.8.3",
-    "typeorm": "^0.2.18",
+    "typeorm": "^0.2.20",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
