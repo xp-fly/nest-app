@@ -1,25 +1,26 @@
 import { join } from 'path';
 
 export class Project {
-  private frameworkDir: string;
-  constructor(frameworkDir: string) {
-    this.frameworkDir = frameworkDir;
-  }
+    private frameworkDir: string;
 
-  pkgJson(appName: string) {
-    const frameworkPkgJson = require(join(this.frameworkDir, 'package.json'));
-    frameworkPkgJson.name = appName;
-    frameworkPkgJson.bin = undefined;
-    return frameworkPkgJson;
-  }
+    constructor(frameworkDir: string) {
+        this.frameworkDir = frameworkDir;
+    }
 
-  tsConfig() {
-    const frameworkTsconfig = require(join(this.frameworkDir, 'tsconfig.json'));
-    return frameworkTsconfig;
-  }
+    pkgJson(appName: string) {
+        const frameworkPkgJson = require(join(this.frameworkDir, 'package.json'));
+        frameworkPkgJson.name = appName;
+        frameworkPkgJson.bin = undefined;
+        return frameworkPkgJson;
+    }
 
-  tsBuildConfig() {
-    const tsBuildConfig = require(join(this.frameworkDir, 'tsconfig.build.json'));
-    return tsBuildConfig;
-  }
+    tsConfig() {
+        const frameworkTsconfig = require(join(this.frameworkDir, 'tsconfig.json'));
+        return frameworkTsconfig;
+    }
+
+    tsBuildConfig() {
+        const tsBuildConfig = require(join(this.frameworkDir, 'tsconfig.build.json'));
+        return tsBuildConfig;
+    }
 }

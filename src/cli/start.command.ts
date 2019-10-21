@@ -5,31 +5,31 @@ import * as shelljs from 'shelljs';
 import { existsSync } from 'fs';
 
 export class StartCommand extends AbstractCommand {
-  private frameworkRoot: string;
+    private frameworkRoot: string;
 
-  constructor(frameworkRoot: string) {
-    super();
-    this.frameworkRoot = frameworkRoot;
-  }
+    constructor(frameworkRoot: string) {
+        super();
+        this.frameworkRoot = frameworkRoot;
+    }
 
-  public load(program: CommanderStatic) {
-    program
-      .command('start')
-      .action(() => {
-        const projectDir = process.cwd();
-        const modulesDir = resolve(this.frameworkRoot, 'modules');
-        const pkgJson = require(resolve(projectDir, 'package.json'));
-        const appName = pkgJson.name.replace(/nestapp-/g, '');
-        const appDir = resolve(modulesDir, appName);
-        // 构建
-        shelljs.exec('npm run build');
-        // 先删除再cp
-        if (existsSync(appDir)) {
-          shelljs.rm('-rf', appDir);
-        }
-        shelljs.cp('-R', resolve(projectDir, 'dist'), appDir);
-        shelljs.cd(this.frameworkRoot);
-        shelljs.exec('npm run start:prod');
-      });
-  }
+    public load(program: CommanderStatic) {
+        program
+            .command('start')
+            .action(() => {
+                const projectDir = process.cwd();
+                const modulesDir = resolve(this.frameworkRoot, 'modules');
+                const pkgJson = require(resolve(projectDir, 'package.json'));
+                const appName = pkgJson.name.replace(/nestapp-/g, '');
+                const appDir = resolve(modulesDir, appName);
+                // 构建
+                shelljs.exec('npm run build');
+                // 先删除再cp
+                if (existsSync(appDir)) {
+                    shelljs.rm('-rf', appDir);
+                }
+                shelljs.cp('-R', resolve(projectDir, 'dist'), appDir);
+                shelljs.cd(this.frameworkRoot);
+                shelljs.exec('npm run start:prod');
+            });
+    }
 }
