@@ -1,0 +1,7 @@
+port: _SERVER_PORT_ # 启动端口
+dataSource:
+  host: _DB_HOST_ # 数据库 host 127.0.0.1
+  port: _DB_PORT_ # 数据库端口 3306
+  username: _DB_USERNAME_ # 数据库用户 root
+  password: _DB_PASSWORD_ # 数据库密码 123456
+  database: _DB_DATABASE_ # 数据库名称 vote
