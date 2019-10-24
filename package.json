@@ -31,7 +31,7 @@
     "commander": "^2.20.0",
     "execa": "^2.0.3",
     "mysql": "^2.17.1",
-    "nestjs-configure": "^0.1.7",
+    "nestjs-configure": "^0.1.8",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "rxjs": "^6.3.3",
