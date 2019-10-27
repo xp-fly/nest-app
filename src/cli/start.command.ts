@@ -28,6 +28,7 @@ export class StartCommand extends AbstractCommand {
                     shelljs.rm('-rf', appDir);
                 }
                 shelljs.cp('-R', resolve(projectDir, 'dist'), appDir);
+                shelljs.cp(resolve(projectDir, 'src/bootstrap.yml'), appDir);
                 shelljs.cd(this.frameworkRoot);
                 shelljs.exec('npm run start:prod');
             });
