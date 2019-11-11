@@ -1,4 +1,4 @@
-import { ExceptionFilter, Catch, ArgumentsHost, HttpException, HttpStatus } from '@nestjs/common';
+import { ExceptionFilter, Catch, ArgumentsHost, HttpException, HttpStatus, Logger } from '@nestjs/common';
 
 @Catch()
 export class AnyExceptionFilter implements ExceptionFilter {
@@ -12,6 +12,7 @@ export class AnyExceptionFilter implements ExceptionFilter {
         const message = exception instanceof HttpException
             ? exception.message
             : 'unknow server error';
+        console.error(exception);
         response
             .status(status)
             .json({
