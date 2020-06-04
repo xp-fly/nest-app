@@ -11,7 +11,7 @@ export class AnyExceptionFilter implements ExceptionFilter {
             : HttpStatus.INTERNAL_SERVER_ERROR;
         const message = exception instanceof HttpException
             ? exception.message
-            : 'unknow server error';
+            : 'unknown server error';
         console.error(exception);
         response
             .status(status)

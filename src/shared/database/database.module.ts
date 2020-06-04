@@ -1,9 +1,8 @@
-import { DynamicModule, Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from 'nestjs-configure';
+import { DynamicModule, Module, Inject } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import * as path from 'path';
-import { Repository } from 'typeorm';
-import { DatabaseInitOptions } from './database.interface';
+import { DatabaseInitOptions, DatabaseConfig } from './database.interface';
+import {ConfigService, ConfigType, ConfigModule} from '@nestjs/config';
+import databaseConfig from './__test__/database.config';
 
 @Module({})
 export class DatabaseModule {
@@ -12,29 +11,28 @@ export class DatabaseModule {
      * @param configName 配置名称
      * @param configName 连接名称 唯一
      */
-    static init(options: DatabaseInitOptions): DynamicModule {
+    static init(options: DatabaseInitOptions, inject: string): DynamicModule {
         return {
             module: DatabaseModule,
             imports: [
                 TypeOrmModule.forRootAsync({
                     name: options.connectName,
-                    useFactory: (configService: ConfigService) => {
-                        const dataSource = (configService.get(options.configName) || {}).dataSource;
+                    useFactory: (databaseCfg: ConfigType<DatabaseConfig>) => {
                         return {
                             type: 'mysql',
-                            host: dataSource.host,
-                            port: dataSource.port,
-                            username: dataSource.username,
-                            password: dataSource.password,
-                            database: dataSource.database,
+                            host: databaseCfg.host,
+                            port: databaseCfg.port,
+                            username: databaseCfg.username,
+                            password: databaseCfg.password,
+                            database: databaseCfg.database,
                             entities: [
                                 options.entitiesPath,
                             ],
                             synchronize: false,
-                            logging: dataSource.logging,
+                            logging: databaseCfg.logging,
                         };
                     },
-                    inject: [ConfigService],
+                    inject: [inject],
                 }),
             ],
         };
