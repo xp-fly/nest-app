@@ -1,5 +1,5 @@
 import { TestingModule, Test } from "@nestjs/testing"
-import { ConfigModule } from "@nestjs/config";
+import { ConfigModule, ConfigService } from "@nestjs/config";
 import databaseConfig from "./database.config";
 import { DatabaseModule } from "../database.module";
 
@@ -9,9 +9,9 @@ describe('DatabaseModule', () => {
             imports: [
                 ConfigModule.forRoot({
                     load: [databaseConfig],
+                    isGlobal: true,
                 }),
                 DatabaseModule.init({
-                    configName: 'test',
                     connectName: 'test',
                     entitiesPath: '',
                 }, databaseConfig.KEY),
