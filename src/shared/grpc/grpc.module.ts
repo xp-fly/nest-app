@@ -1,12 +1,12 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { GrpcClientModule } from 'nestjs-grpc-client';
-import { ConfigService } from 'nestjs-configure';
-import { GrpcInitOptions } from './grpc.interface';
+import { GrpcInitOptions, GrpcConfig } from './grpc.interface';
 import { GrpcOptions, Transport } from '@nestjs/microservices';
+import { ConfigType } from '@nestjs/config';
 
 @Module({})
 export class GrpcModule {
-    static init(options: GrpcInitOptions): DynamicModule {
+    static init(options: GrpcInitOptions, inject: string): DynamicModule {
         const packages: GrpcOptions[] = options.packages.map(item => {
             return {
                 transport: Transport.GRPC,
@@ -23,11 +23,10 @@ export class GrpcModule {
             module: GrpcModule,
             imports: [
                 GrpcClientModule.registerAsync(packages, {
-                    useFactory: (configService) => {
-                        const config = configService.get(options.configName);
-                        return config.grpc;
+                    useFactory: (grpcConfig: ConfigType<GrpcConfig>) => {
+                        return grpcConfig;
                     },
-                    inject: [ConfigService],
+                    inject: [inject],
                 }),
             ],
         };
