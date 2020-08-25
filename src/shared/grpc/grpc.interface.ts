@@ -10,7 +10,7 @@ interface GrpcPackageInterface {
     protoPath: string;
 }
 
-export type GrpcConfig = () => ([{
+export type GrpcConfig = () => ({
     package: string,
     url: string,
-}])
+}[])
